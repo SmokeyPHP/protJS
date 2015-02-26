@@ -595,8 +595,8 @@ Function.prototype.debounce=function(b,c){var d,a=this;return function(){var e=t
 function addEvent(o,e,f){if(e instanceof Array){A(e).loop(function(a){addEvent(o,a,f);});return;}e=e.replace(/^on/,'');if(typeof f!=='function'){return false;}if(o.addEventListener){return o.addEventListener(e,f,false);}else return o.attachEvent("on"+e,f);}
 function addOnload(myfunc){addEvent(window,'onload',myfunc);}
 function protCopy(val,deep) {
-    if(val instanceof Array){var out=[],i=0,len=val.length;for (;i<len;i++){out[i]=deep?arguments.callee(val[i],deep):val[i];}return out;}
-    if(typeof val==='object'){var out={},i;for (i in val){out[i]=deep?arguments.callee(val[i],deep):val[i];}return out;}
+    if(val instanceof Array){var out=[],i=0,len=val.length;for(;i<len;i++){out[i]=deep?protCopy(val[i],deep):val[i];}return out;}
+    if(typeof val==='object'){var out={},i;for(i in val){out[i]=deep?protCopy(val[i],deep):val[i];}return out;}
     return val;
 }
 function df(v,t,d){var r=typeof t==="undefined"?typeof v!=="undefined":typeof v===t;if(typeof d!=='undefined')return r?v:d;else return r;}
